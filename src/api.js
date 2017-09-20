@@ -80,6 +80,10 @@ class People {
   static GetList (params) {
     return Get('/personas', params)
   }
+  // New persona
+  static SendNewds (data) {
+    return Post('/personas', data)
+  }
 }
 
 class Buildings {
