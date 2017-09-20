@@ -181,7 +181,7 @@ export default class Buildings extends Component {
         title='Nuevo Reporte de Edificio'
         isActive={this.state.modalOpen}
         toggleModal={this.toggleModal.bind(this)}
-        onSubmit={this.onSubmit.bind(this)}
+        onSubmit={this.onSubmit.bind(this, this.state.id)}
       >
         <div>
           <div className='columns'>
