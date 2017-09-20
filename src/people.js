@@ -89,7 +89,14 @@ export default class People extends Component {
   }
 
   toggleModal () {
-    this.setState({modalOpen: !this.state.modalOpen})
+    this.setState({
+      modalOpen: !this.state.modalOpen,
+      name: this.data.name,
+      gender: this.data.gender,
+      age: this.data.age,
+      status: this.data.status,
+      notes: this.data.notes
+    })
   }
 
   onFilter () {
@@ -110,13 +117,14 @@ export default class People extends Component {
 
   setPerson (person) {
     this.setState({
+      modalOpen: !this.state.modalOpen,
       name: person.nombre,
       age: person.edad,
       gender: person.sexo,
       status: person.estado,
       notes: person.notas,
       id: person.id
-    }, this.toggleModal)
+    })
   }
 
   onSubmit (id = '') {
