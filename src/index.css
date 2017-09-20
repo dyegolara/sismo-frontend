@@ -14,3 +14,19 @@ body {
   flex-direction: column;
   margin-bottom: 1rem;
 }
+
+.tabs.responsive {
+  font-size: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .tabs.responsive {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tabs.responsive {
+    font-size: 1.25rem;
+  }
+}
