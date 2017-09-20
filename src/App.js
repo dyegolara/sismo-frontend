@@ -25,16 +25,16 @@ const TABS = [
     slug: '/edificios'
   },
   {
+    label: 'Mapa',
+    slug: '/mapa'
+  },
+  {
     label: 'Albergues',
     slug: '/albergues'
   },
   {
     label: 'Donaciones',
     slug: '/donaciones'
-  },
-  {
-    label: 'Mapa',
-    slug: '/mapa'
   }
 ]
 
@@ -87,13 +87,13 @@ class App extends Component {
         content = (<Buildings {...this.props} />)
         break
       case TABS[2].label:
-        content = (<Shelters{...this.props} />)
+        content = (<Map{...this.props} />)
         break
       case TABS[3].label:
-        content = (<Donations {...this.props} />)
+        content = (<Shelters {...this.props} />)
         break
       case TABS[4].label:
-        content = (<Map {...this.props} />)
+        content = (<Donations {...this.props} />)
         break
     }
 
