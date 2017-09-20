@@ -13,6 +13,7 @@ const routes = (
     <Route path='/personas' component={App} />
     <Route path='/edificios' component={App} />
     <Route path='/albergues' component={App} />
+    <Route path='/donaciones' component={App} />
     <Redirect from='/' to='/personas' />
   </Route>
 )
