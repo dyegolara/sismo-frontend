@@ -3,6 +3,7 @@ import _pickBy from 'lodash/pickBy'
 
 import API from './api'
 import TextField from './textField'
+import Modal from './modal'
 import Button from './button'
 
 export default class Shelters extends Component {
