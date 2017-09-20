@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextField /> matches snapshot with default props 1`] = `
+<div
+  className="control"
+>
+  <p>
+    <input
+      className="input "
+      disabled={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder=""
+      required={false}
+      type="text"
+      value=""
+    />
+  </p>
+  <span
+    className="help is-danger is-hidden"
+  >
+    
+  </span>
+</div>
+`;

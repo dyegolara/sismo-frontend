@@ -25,7 +25,6 @@ const TABS = [
 class App extends Component {
   constructor (props) {
     super(props)
-    console.log(props)
     let path = props.location.pathname
     let test = TABS.filter((tab) => { if (path.includes(tab.slug)) return tab })
     this.data = {
@@ -53,7 +52,7 @@ class App extends Component {
       )
     })
     return (
-      <div className='tabs is-centered is-boxed is-medium'>
+      <div className='tabs is-centered is-boxed is-medium is-fullwidth'>
         <ul>
           {renderTabs}
         </ul>
