@@ -25,7 +25,8 @@ export default class Buildings extends Component {
       colonia: '',
       estado: '',
       link: '',
-      notas: ''
+      notas: '',
+      id: ''
     }
     this.state = Object.assign({}, this.data)
   }
@@ -54,18 +55,22 @@ export default class Buildings extends Component {
     this.setState({notas: e.target.value})
   }
 
-  toggleModal () {
+  resetState () {
     this.setState({
-      modalOpen: !this.state.modalOpen,
       direccion: this.data.direccion,
       colonia: this.data.colonia,
       estado: this.data.estado,
       link: this.data.link,
-      notas: this.data.notas
+      notas: this.data.notas,
+      id: this.data.id
     })
   }
 
-  onSubmit () {
+  toggleModal () {
+    this.setState({modalOpen: !this.state.modalOpen}, this.resetState)
+  }
+
+  onSubmit (id = '') {
     let { direccion, colonia, estado, link, notas, buildings } = this.state
     let data = {
       direccion,
@@ -73,6 +78,13 @@ export default class Buildings extends Component {
       estado,
       link,
       notas
+    }
+    if (id) {
+      API.Buildings.Update(id, data)
+        .then(response => {
+          buildings.push(response.edificio)
+          this.setState({ buildings }, this.resetState)
+        })
     }
     API.Buildings.SendNewds(data)
       .then(response => {
@@ -104,7 +116,7 @@ export default class Buildings extends Component {
           onClick={this.toggleModal.bind(this)}
           icon='plus'
         >
-          Nuevo Reporte
+          Nuevo Reporte de Edificio
         </Button>
       </div>
     )

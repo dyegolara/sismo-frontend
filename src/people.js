@@ -91,8 +91,23 @@ export default class People extends Component {
     this.setState({modalOpen: !this.state.modalOpen})
   }
 
+  onFilter () {
+    browserHistory.push('/personas')
+    this.loadData()
+  }
+
+  resetState () {
+    this.setState({
+      id: '',
+      name: '',
+      age: '',
+      gender: '',
+      status: '',
+      notes: ''
+    })
+  }
+
   setPerson (person) {
-    console.log(person)
     this.setState({
       name: person.nombre,
       age: person.edad,
@@ -116,15 +131,7 @@ export default class People extends Component {
       API.People.Update(id, data)
         .then(response => {
           people.push(response.persona)
-          this.setState({
-            people,
-            id: '',
-            name: '',
-            age: '',
-            gender: '',
-            status: '',
-            notes: '',
-          })
+          this.setState({ people }, this.resetState)
         })
     } else {
       API.People.SendNewds(data)
@@ -134,11 +141,6 @@ export default class People extends Component {
         })
     }
     this.toggleModal()
-  }
-
-  onFilter () {
-    browserHistory.push('/personas')
-    this.loadData()
   }
 
   // Get clients
@@ -163,7 +165,7 @@ export default class People extends Component {
           onClick={this.toggleModal.bind(this)}
           icon='plus'
         >
-          Nuevo Reporte
+          Nuevo Reporte de Persona
         </Button>
       </div>
     )

@@ -86,7 +86,7 @@ class People {
   }
   // New persona
   static Update (id, data) {
-    return Post('/personas/' + id, data)
+    return Put('/personas/' + id, data)
   }
 }
 
@@ -98,6 +98,10 @@ class Buildings {
   // New edificio
   static SendNewds (data) {
     return Post('/edificios', data)
+  }
+  // New edificio
+  static Update (id, data) {
+    return Put('/personas/' + id, data)
   }
 }
 
