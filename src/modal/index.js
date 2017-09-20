@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import classNames from 'classnames'
 
-import Button from 'shared/button'
+import Button from '../button'
 
 const Modal = props => {
   return (
@@ -21,7 +21,7 @@ const Modal = props => {
         <footer className='modal-card-foot columns'>
           <div className='control column is-3'>
             <Button
-              buttonStyle='dangerInv'
+              buttonStyle='danger is-outlined'
               className='is-fullwidth'
               onClick={props.toggleModal}
             >Cancelar</Button>
