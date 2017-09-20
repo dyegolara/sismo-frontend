@@ -78,12 +78,33 @@ class App extends Component {
     return content
   }
 
+  // Render menu
+  renderMenu () {
+    return (
+      <section className='hero is-primary'>
+        <div className='hero-body'>
+          <div className='container'>
+            <h1 className='title'>
+              Ayuda para sismos, inundaciones y demás en México
+            </h1>
+            <h2 className='subtitle'>
+              Sismo del 19 de septiembre de 2017
+            </h2>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   render () {
     return (
-      <div className='container'>
-        <h1 className='title'>Encontrar gente sismo</h1>
-        {this.renderTabs()}
-        {this.renderContent()}
+      <div>
+        {this.renderMenu()}
+        <div className='container'>
+          <h1 className='title'>Encontrar gente sismo</h1>
+          {this.renderTabs()}
+          {this.renderContent()}
+        </div>
       </div>
     )
   }
