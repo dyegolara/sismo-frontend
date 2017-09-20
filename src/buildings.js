@@ -71,7 +71,6 @@ export default class Buildings extends Component {
   }
 
   setBuilding (building) {
-    console.log(building)
     this.setState({
       direccion: building.direccion,
       colonia: building.colonia,
@@ -177,7 +176,6 @@ export default class Buildings extends Component {
   }
 
   renderModal () {
-    console.log(this.state)
     return (
       <Modal
         title='Nuevo Reporte de Edificio'
