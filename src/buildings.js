@@ -24,7 +24,6 @@ export default class Buildings extends Component {
     let params = Object.assign({}, _filters)
     API.Buildings.GetList(params)
       .then(response => {
-        console.log(response)
         this.setState({buildings: response.edificios})
       })
   }
@@ -41,6 +40,7 @@ export default class Buildings extends Component {
             <td>{building.direccion}</td>
             <td>{building.colonia}</td>
             <td>{building.estado}</td>
+            <td><a href={building.link}>{building.link}</a></td>
             <td>{building.notas}</td>
           </tr>
         )
@@ -53,6 +53,7 @@ export default class Buildings extends Component {
                 <th>Direccion</th>
                 <th>Colonia</th>
                 <th>Estado</th>
+                <th>Link al mapa</th>
                 <th>Notas</th>
               </tr>
             </thead>
