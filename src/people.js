@@ -16,6 +16,7 @@ const STATUS = [
 ]
 
 const GENDER = [
+  {id: '', label: 'Otro / No especificado'},
   {id: 'm', label: 'Hombre'},
   {id: 'f', label: 'Mujer'}
 ]
@@ -36,7 +37,7 @@ export default class People extends Component {
       name: '',
       gender: '',
       age: '',
-      status: '',
+      status: 'Desaparecido',
       notes: '',
       id: ''
     }
