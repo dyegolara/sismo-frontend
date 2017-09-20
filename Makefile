@@ -1,5 +1,6 @@
-deploy:
-	cp index.html build/index.html
+.PHONY: build
+
+deploy: build
 	rsync -avz \
 	-e "ssh" build/ jmz7v@192.81.209.31:/var/www/ayuda-mx.com/public/
 
