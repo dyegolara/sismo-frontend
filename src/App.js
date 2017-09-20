@@ -6,9 +6,12 @@ import './bulma.css'
 import People from './people'
 import Buildings from './buildings'
 import Shelters from './shelters'
+
+// Estáticos
 import HelpNumbers from './helpNumbers'
 import Footer from './footer'
 import Header from './header'
+import WhatWeKnow from './whatWeKnow'
 
 const TABS = [
   {
@@ -92,6 +95,8 @@ class App extends Component {
           </div>
           <hr />
           <HelpNumbers />
+          <hr />
+          <WhatWeKnow />
           <hr />
           <Footer />
         </div>
