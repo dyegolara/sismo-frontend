@@ -7,10 +7,15 @@ import Button from './button'
 import TextField from './textField'
 import SelectField from './selectField'
 
-const STATE = [
+const STATUS = [
   {id: 'missing', label: 'Desaparecido'},
   {id: 'found', label: 'Encontrado'},
   {id: 'dead', label: 'Fallecido'}
+]
+
+const GENDER = [
+  {id: 'male', label: 'Hombre'},
+  {id: 'female', label: 'Mujer'}
 ]
 
 export default class People extends Component {
@@ -27,16 +32,20 @@ export default class People extends Component {
     this.state = Object.assign({}, this.data)
   }
 
-  onChangeLegalName (e) {
-    this.setState({filters: update(this.state.filters, {legal_name: {$set: e.target.value}})})
+  onChangeName (e) {
+    this.setState({filters: update(this.state.filters, {name: {$set: e.target.value}})})
   }
 
-  onChangeRFC (e) {
-    this.setState({filters: update(this.state.filters, {rfc: {$set: e.target.value}})})
+  onChangeGender (e) {
+    this.setState({filters: update(this.state.filters, {gender: {$set: e.target.value}})})
   }
 
-  onChangeFielStatus (e) {
-    this.setState({filters: update(this.state.filters, {with_fiel: {$set: e.target.value}})})
+  onChangeAge (e) {
+    this.setState({filters: update(this.state.filters, {age: {$set: e.target.value}})})
+  }
+
+  onChangeStatus (e) {
+    this.setState({filters: update(this.state.filters, {status: {$set: e.target.value}})})
   }
 
   onCleanFilters () {
@@ -59,7 +68,6 @@ export default class People extends Component {
       active_status: 'active' // fixed filter
     })
     // ClientsStatusFielActions.GetClientsStatusFiel(params)
-    //   .then(() => this.setState({filterApplied: filters}))
   }
 
   renderFilters () {
@@ -70,26 +78,34 @@ export default class People extends Component {
       >
         <div className='column'>
           <TextField
-            onChange={this.onChangeLegalName.bind(this)}
-            placeholder='Razón Social'
-            value={this.state.filters.legal_name}
-            onEnter={this.onFilter.bind(this)}
-          />
-        </div>
-        <div className='column'>
-          <TextField
-            onChange={this.onChangeRFC.bind(this)}
-            placeholder='RFC'
-            value={this.state.filters.rfc}
+            onChange={this.onChangeName.bind(this)}
+            placeholder='Nombre'
+            value={this.state.filters.name}
             onEnter={this.onFilter.bind(this)}
           />
         </div>
         <div className='column'>
           <SelectField
-            onChange={this.onChangeFielStatus.bind(this)}
+            options={GENDER}
+            onChange={this.onChangeGender.bind(this)}
+            placeholder='Sexo'
+            value={this.state.filters.gender}
+          />
+        </div>
+        <div className='column'>
+          <TextField
+            onChange={this.onChangeAge.bind(this)}
+            placeholder='Edad'
+            value={this.state.filters.age}
+            onEnter={this.onFilter.bind(this)}
+          />
+        </div>
+        <div className='column'>
+          <SelectField
+            onChange={this.onChangeStatus.bind(this)}
             placeholder='Estado'
-            value={this.state.filters.with_fiel}
-            options={STATE}
+            value={this.state.filters.status}
+            options={STATUS}
           />
         </div>
         <div className='column is-3-desktop'>
@@ -114,6 +130,7 @@ export default class People extends Component {
       </form>
     )
   }
+  
   render () {
     return (
       <div>
