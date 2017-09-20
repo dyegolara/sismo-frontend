@@ -63,7 +63,7 @@ class App extends Component {
       )
     })
     return (
-      <div className='tabs is-centered is-boxed is-medium is-fullwidth'>
+      <div className='tabs is-centered is-boxed is-small is-fullwidth'>
         <ul>
           {renderTabs}
         </ul>
