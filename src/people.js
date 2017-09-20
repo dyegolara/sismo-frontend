@@ -130,11 +130,50 @@ export default class People extends Component {
       </form>
     )
   }
-  
+
+  renderTable () {
+    let { people } = this.state
+    let table = (<div>Cargando...</div>)
+    if (people.length > 0) {
+      let peopleList = people.map((person, index) => {
+        return (
+          <tr
+            key={`people-${index}`}
+          >
+            <td>{person.name}</td>
+            <td>{person.age}</td>
+            <td>{person.gender}</td>
+            <td>{person.status}</td>
+            <td>{person.comments}</td>
+          </tr>
+        )
+      })
+      table = (
+        <div>
+          <table className='table is-striped'>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Sexo</th>
+                <th>Estado</th>
+                <th>Comentarios</th>
+              </tr>
+            </thead>
+            <tbody>
+              {peopleList}
+            </tbody>
+          </table>
+        </div>
+      )
+    }
+    return table
+  }
   render () {
     return (
       <div>
         {this.renderFilters()}
+        {this.renderTable()}
       </div>
     )
   }
