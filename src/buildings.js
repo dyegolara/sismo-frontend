@@ -33,29 +33,27 @@ export default class Buildings extends Component {
     let { buildings } = this.state
     let table = (<div>Cargando...</div>)
     if (buildings.length > 0) {
-      let buildingsList = buildings.map((building, index) => {
+      let buildingsList = buildings.map(building => {
         return (
           <tr
-            key={`buildings-${index}`}
+            key={`buildings-${building.id}`}
           >
-            <td>{building.address}</td>
-            <td>{building.colony}</td>
-            <td>{building.status}</td>
-            <td>{building.mapsLink}</td>
-            <td>{building.comments}</td>
+            <td>{building.direccion}</td>
+            <td>{building.colonia}</td>
+            <td>{building.estado}</td>
+            <td>{building.notas}</td>
           </tr>
         )
       })
       table = (
         <div>
-          <table className='table is-striped'>
+          <table className='table is-striped is-fullwidth'>
             <thead>
               <tr>
-                <th>Nombre</th>
-                <th>Edad</th>
-                <th>Sexo</th>
+                <th>Direccion</th>
+                <th>Colonia</th>
                 <th>Estado</th>
-                <th>Comentarios</th>
+                <th>Notas</th>
               </tr>
             </thead>
             <tbody>
