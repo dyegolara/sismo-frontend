@@ -87,9 +87,13 @@ class People {
 }
 
 class Buildings {
-  // Gets personas
+  // Gets edificios
   static GetList (params) {
     return Get('/edificios', params)
+  }
+  // New edificio
+  static SendNewds (data) {
+    return Post('/edificios', data)
   }
 }
 
