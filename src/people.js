@@ -142,10 +142,10 @@ export default class People extends Component {
     let { people } = this.state
     let table = (<div>Cargando...</div>)
     if (people.length > 0) {
-      let peopleList = people.map((person, index) => {
+      let peopleList = people.map(person => {
         return (
           <tr
-            key={`people-${index}`}
+            key={`people-${person.id}`}
           >
             <td>{person.nombre}</td>
             <td>{person.edad}</td>
