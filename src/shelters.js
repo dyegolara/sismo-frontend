@@ -40,7 +40,7 @@ export default class Shelters extends Component {
   }
 
   toggleModal () {
-    this.setState({modalOpen: !this.state.modalOpen}, this.resetState)
+    this.setState({modalOpen: !this.state.modalOpen})
   }
 
   setShelter (shelter) {
