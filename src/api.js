@@ -8,6 +8,8 @@
 import 'whatwg-fetch'
 import queryString from 'query-string'
 
+const DEBUG = true
+
 // Make the actual request
 function request (method, endpoint, queryArray, body) {
   let query = ''
@@ -34,16 +36,16 @@ function request (method, endpoint, queryArray, body) {
 
   if (body) fetchParams['body'] = JSON.stringify(body)
 
-  if (process.env.DEBUG) console.log('myRequest', url, fetchParams)
+  if (DEBUG) console.log('myRequest', url, fetchParams)
   // Call the API and return a json response
   return window.fetch(url, fetchParams)
     .then(response => {
-      if (process.env.DEBUG) console.log('apiResponse', response)
+      if (DEBUG) console.log('apiResponse', response)
       if (!response.ok) return response.json().then(r => { throw r.error })
       if (response.status === 204) return
       return response.json()
         .then(r => {
-          if (process.env.DEBUG) {
+          if (DEBUG) {
             console.info(`${method}: ${endpoint}${query}`)
             console.info('resolvedRes', r)
           }
@@ -80,6 +82,22 @@ class People {
   }
 }
 
+class Buildings {
+  // Gets personas
+  static GetList (params) {
+    return Get('/edificios', params)
+  }
+}
+
+class Shelters {
+  // Gets personas
+  static GetList (params) {
+    return Get('/albergues', params)
+  }
+}
+
 export default {
   People,
+  Buildings,
+  Shelters
 }
