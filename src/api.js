@@ -101,7 +101,7 @@ class Buildings {
   }
   // New edificio
   static Update (id, data) {
-    return Put('/personas/' + id, data)
+    return Put('/edificios/' + id, data)
   }
 }
 
@@ -109,6 +109,14 @@ class Shelters {
   // Gets personas
   static GetList (params) {
     return Get('/albergues', params)
+  }
+  // New edificio
+  static SendNewds (data) {
+    return Post('/albergues', data)
+  }
+  // New edificio
+  static Update (id, data) {
+    return Put('/albergues/' + id, data)
   }
 }
 
