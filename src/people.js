@@ -147,24 +147,24 @@ export default class People extends Component {
           <tr
             key={`people-${index}`}
           >
-            <td>{person.name}</td>
-            <td>{person.age}</td>
-            <td>{person.gender}</td>
-            <td>{person.status}</td>
-            <td>{person.comments}</td>
+            <td>{person.nombre}</td>
+            <td>{person.edad}</td>
+            <td>{person.sexo}</td>
+            <td>{person.estado}</td>
+            <td>{person.notas}</td>
           </tr>
         )
       })
       table = (
         <div>
-          <table className='table is-striped'>
+          <table className='table is-striped is-fullwidth'>
             <thead>
               <tr>
                 <th>Nombre</th>
                 <th>Edad</th>
                 <th>Sexo</th>
                 <th>Estado</th>
-                <th>Comentarios</th>
+                <th>Notas</th>
               </tr>
             </thead>
             <tbody>
