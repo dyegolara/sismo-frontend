@@ -8,6 +8,7 @@ import Buildings from './buildings'
 import Shelters from './shelters'
 import HelpNumbers from './helpNumbers'
 import Footer from './footer'
+import Header from './header'
 
 const TABS = [
   {
@@ -80,28 +81,10 @@ class App extends Component {
     return content
   }
 
-  // Render menu
-  renderMenu () {
-    return (
-      <section className='hero is-primary'>
-        <div className='hero-body'>
-          <div className='container'>
-            <h1 className='title'>
-              Ayuda para sismos, inundaciones y demás en México
-            </h1>
-            <h2 className='subtitle'>
-              Sismo del 19 de septiembre de 2017
-            </h2>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
   render () {
     return (
       <div>
-        {this.renderMenu()}
+        <Header />
         <div className='container'>
           <div className='section'>
             {this.renderTabs()}
