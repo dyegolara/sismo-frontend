@@ -1,5 +1,4 @@
-import React, { PropTypes } from 'react'
-import classNames from 'classnames'
+import React from 'react'
 
 const HelpNumbers = props => {
   return (
