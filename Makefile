@@ -16,3 +16,7 @@ build:
 
 standard:
 	standard --fix
+
+pull:
+	git pull upstream master
+

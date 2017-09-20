@@ -7,6 +7,7 @@ import People from './people'
 import Buildings from './buildings'
 import Shelters from './shelters'
 import Donations from './donations'
+import Map from './map'
 
 // Estáticos
 import HelpNumbers from './helpNumbers'
@@ -30,6 +31,10 @@ const TABS = [
   {
     label: 'Donaciones',
     slug: '/donaciones'
+  },
+  {
+    label: 'Mapa',
+    slug: '/mapa'
   }
 ]
 
@@ -86,6 +91,9 @@ class App extends Component {
         break
       case TABS[3].label:
         content = (<Donations {...this.props} />)
+        break
+      case TABS[4].label:
+        content = (<Map {...this.props} />)
         break
     }
 

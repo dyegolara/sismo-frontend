@@ -14,6 +14,7 @@ const routes = (
     <Route path='/edificios' component={App} />
     <Route path='/albergues' component={App} />
     <Route path='/donaciones' component={App} />
+    <Route path='/mapa' component={App} />
     <Redirect from='/' to='/personas' />
   </Route>
 )
