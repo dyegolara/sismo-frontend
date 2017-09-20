@@ -60,7 +60,8 @@ export default class Shelters extends Component {
     if (id) {
       API.Shelters.Update(id, data)
         .then(response => {
-          shelters.push(response.albergue)
+          let updatedShelter = response.albergue
+          shelters = shelters.map(shelter => shelter.id === updatedShelter.id ? updatedShelter : shelter)
           this.setState({ shelters }, this.resetState)
         })
     }

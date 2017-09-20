@@ -130,7 +130,8 @@ export default class People extends Component {
     if (id) {
       API.People.Update(id, data)
         .then(response => {
-          people.push(response.persona)
+          let updatedPerson = response.person
+          people = people.map(person => person.id === updatedPerson.id ? updatedPerson : person)
           this.setState({ people }, this.resetState)
         })
     } else {

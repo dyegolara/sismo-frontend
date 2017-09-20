@@ -93,7 +93,8 @@ export default class Buildings extends Component {
     if (id) {
       API.Buildings.Update(id, data)
         .then(response => {
-          buildings.push(response.edificio)
+          let updatedBuilding = response.edificio
+          buildings = buildings.map(building => building.id === updatedBuilding.id ? updatedBuilding : building)
           this.setState({ buildings }, this.resetState)
         })
     }
