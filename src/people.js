@@ -32,6 +32,7 @@ export default class People extends Component {
         estado: ''
       },
       modalOpen: false,
+      reqInProg: false,
       name: '',
       gender: '',
       age: '',
@@ -146,9 +147,10 @@ export default class People extends Component {
     let _filters = _pickBy(filters, filter => filter.length > 0)
     // let page = currentPage > 1 ? {page: currentPage} : {}
     let params = Object.assign({}, _filters)
+    this.setState({reqInProg: true})
     API.People.GetList(params)
       .then(response => {
-        this.setState({people: response.personas})
+        this.setState({people: response.personas, reqInProg: false})
       })
   }
 
@@ -226,8 +228,9 @@ export default class People extends Component {
   }
 
   renderTable () {
-    let { people } = this.state
-    let table = (<div>Cargando...</div>)
+    let { people, reqInProg } = this.state
+    if (reqInProg) return <div>Cargando...</div>
+    let table = <div>No hay resultados...</div>
     if (people.length > 0) {
       let peopleList = people.map(person => {
         let gender = 'Otro / no especificado'
@@ -271,7 +274,7 @@ export default class People extends Component {
   renderModal () {
     return (
       <Modal
-        title='Nuevo Reporte'
+        title='Nuevo Reporte de Persona'
         isActive={this.state.modalOpen}
         toggleModal={this.toggleModal.bind(this)}
         onSubmit={this.onSubmit.bind(this, this.state.id)}

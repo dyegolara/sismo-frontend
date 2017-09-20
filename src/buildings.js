@@ -20,6 +20,7 @@ export default class Buildings extends Component {
     this.data = {
       buildings: [],
       modalOpen: false,
+      reqInProg: false,
       direccion: '',
       colonia: '',
       estado: '',
@@ -87,9 +88,10 @@ export default class Buildings extends Component {
     let _filters = _pickBy(filters, filter => filter.length > 0)
     // let page = currentPage > 1 ? {page: currentPage} : {}
     let params = Object.assign({}, _filters)
+    this.setState({reqInProg: true})
     API.Buildings.GetList(params)
       .then(response => {
-        this.setState({buildings: response.edificios})
+        this.setState({buildings: response.edificios, reqInProg: false})
       })
   }
 
@@ -109,8 +111,9 @@ export default class Buildings extends Component {
   }
 
   renderTable () {
-    let { buildings } = this.state
-    let table = (<div>Cargando...</div>)
+    let { buildings, reqInProg } = this.state
+    if (reqInProg) return <div>Cargando...</div>
+    let table = <div>No hay resultados...</div>
     if (buildings.length > 0) {
       let buildingsList = buildings.map(building => {
         return (
@@ -150,7 +153,7 @@ export default class Buildings extends Component {
   renderModal () {
     return (
       <Modal
-        title='Nuevo Reporte'
+        title='Nuevo Reporte de Edificio'
         isActive={this.state.modalOpen}
         toggleModal={this.toggleModal.bind(this)}
         onSubmit={this.onSubmit.bind(this)}

@@ -7,7 +7,8 @@ export default class Shelters extends Component {
   constructor () {
     super()
     this.data = {
-      shelters: []
+      shelters: [],
+      reqInProg: false
     }
     this.state = Object.assign({}, this.data)
   }
@@ -22,16 +23,17 @@ export default class Shelters extends Component {
     let _filters = _pickBy(filters, filter => filter.length > 0)
     // let page = currentPage > 1 ? {page: currentPage} : {}
     let params = Object.assign({}, _filters)
+    this.setState({reqInProg: true})
     API.Shelters.GetList(params)
       .then(response => {
-        console.log(response)
-        this.setState({shelters: response.albergues})
+        this.setState({shelters: response.albergues, reqInProg: false})
       })
   }
 
   renderTable () {
-    let { shelters } = this.state
-    let table = (<div>Cargando...</div>)
+    let { shelters, reqInProg } = this.state
+    if (reqInProg) return <div>Cargando...</div>
+    let table = <div>No hay resultados...</div>
     if (shelters.length > 0) {
       let sheltersList = shelters.map((shelter, index) => {
         return (
