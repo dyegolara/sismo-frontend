@@ -55,6 +55,10 @@ export default class Buildings extends Component {
     this.setState({notas: e.target.value})
   }
 
+  toggleModal () {
+    this.setState({modalOpen: !this.state.modalOpen}, this.resetState)
+  }
+
   resetState () {
     this.setState({
       direccion: this.data.direccion,
@@ -66,8 +70,15 @@ export default class Buildings extends Component {
     })
   }
 
-  toggleModal () {
-    this.setState({modalOpen: !this.state.modalOpen}, this.resetState)
+  setBuilding (building) {
+    this.setState({
+      direccion: building.direccion,
+      colonia: building.colonia,
+      estado: building.estado,
+      link: building.link,
+      notas: building.notas,
+      id: building.id
+    }, this.toggleModal)
   }
 
   onSubmit (id = '') {
@@ -131,6 +142,7 @@ export default class Buildings extends Component {
         return (
           <tr
             key={`buildings-${building.id}`}
+            onClick={this.setBuilding.bind(this, building)}
           >
             <td>{building.direccion}</td>
             <td>{building.colonia}</td>

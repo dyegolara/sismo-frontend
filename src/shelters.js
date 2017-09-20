@@ -2,13 +2,18 @@ import React, { Component } from 'react'
 import _pickBy from 'lodash/pickBy'
 
 import API from './api'
+import TextField from './textField'
+import Button from './button'
 
 export default class Shelters extends Component {
   constructor () {
     super()
     this.data = {
       shelters: [],
-      reqInProg: false
+      reqInProg: false,
+      nombre: '',
+      direccion: '',
+      id: ''
     }
     this.state = Object.assign({}, this.data)
   }
@@ -17,6 +22,54 @@ export default class Shelters extends Component {
     this.loadData()
   }
 
+  onChangeAddress (e) {
+    this.setState({direccion: e.target.value})
+  }
+
+  onChangeName (e) {
+    this.setState({nombre: e.target.value})
+  }
+
+  resetState () {
+    this.setState({
+      direccion: this.data.direccion,
+      nnombre: this.data.nombre,
+      id: this.data.id
+    })
+  }
+
+  toggleModal () {
+    this.setState({modalOpen: !this.state.modalOpen}, this.resetState)
+  }
+
+  setShelter (shelter) {
+    this.setState({
+      direccion: shelter.direccion,
+      nombre: shelter.nombre,
+      id: shelter.id
+    }, this.toggleModal)
+  }
+
+  onSubmit (id = '') {
+    let { direccion, nombre, shelters } = this.state
+    let data = {
+      direccion,
+      nombre
+    }
+    if (id) {
+      API.Shelters.Update(id, data)
+        .then(response => {
+          shelters.push(response.albergue)
+          this.setState({ shelters }, this.resetState)
+        })
+    }
+    API.Shelters.SendNewds(data)
+      .then(response => {
+        shelters.push(response.albergue)
+        this.setState({ shelters })
+      })
+    this.toggleModal()
+  }
   // Get clients
   loadData () {
     let { filters, currentPage, sort } = this.state
@@ -30,6 +83,21 @@ export default class Shelters extends Component {
       })
   }
 
+  renderNewButton () {
+    return (
+      <div className='new-element-container'>
+        <Button
+          className='is-pulled-right'
+          buttonStyle='primary'
+          onClick={this.toggleModal.bind(this)}
+          icon='plus'
+        >
+          Nuevo Reporte de Albergue
+        </Button>
+      </div>
+    )
+  }
+
   renderTable () {
     let { shelters, reqInProg } = this.state
     if (reqInProg) return <div>Cargando...</div>
@@ -39,9 +107,10 @@ export default class Shelters extends Component {
         return (
           <tr
             key={`shelters-${index}`}
+            onClick={this.setShelter.bind(this, shelter)}
           >
-            <td>{shelter.type}</td>
-            <td>{shelter.address}</td>
+            <td>{shelter.nombre}</td>
+            <td>{shelter.direccion}</td>
             {/* <td><a href={shelter.mapsLink}>{shelter.mapsLink}</a></td> */}
           </tr>
         )
@@ -51,7 +120,7 @@ export default class Shelters extends Component {
           <table className='table is-striped is-fullwidth'>
             <thead>
               <tr>
-                <th>Tipo</th>
+                <th>Nombre</th>
                 <th>Dirección</th>
               </tr>
             </thead>
@@ -64,10 +133,45 @@ export default class Shelters extends Component {
     }
     return table
   }
+
+  renderModal () {
+    return (
+      <Modal
+        title='Nuevo Reporte de Edificio'
+        isActive={this.state.modalOpen}
+        toggleModal={this.toggleModal.bind(this)}
+        onSubmit={this.onSubmit.bind(this)}
+      >
+        <div>
+          <div className='columns'>
+            <div className='column'>
+              <TextField
+                label='Nombre'
+                value={this.state.nombre}
+                onChange={this.onChangeName.bind(this)}
+              />
+            </div>
+          </div>
+          <div className='columns'>
+            <div className='column'>
+              <TextField
+                label='Dirección'
+                value={this.state.direccion}
+                onChange={this.onChangeAddress.bind(this)}
+              />
+            </div>
+          </div>
+        </div>
+      </Modal>
+    )
+  }
+
   render () {
     return (
       <div>
+        {this.renderNewButton()}
         {this.renderTable()}
+        {this.renderModal()}
       </div>
     )
   }
