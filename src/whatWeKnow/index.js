@@ -20,8 +20,19 @@ const WhatWeKnow = props => {
           <div className='column'>
             <h4 className='subtitle'>Réplicas</h4>
             <p>23 (la mayor de magnitud 4.0) hasta las 5 am del 20 de septiembre.</p>
+            <p>Recuerda que los sismos NO SE PUEDEN PREDECIR</p>
           </div>
         </div>
+        <p className='notification is-info has-text-centered'>
+          Miércoles 20 de Septiembre, 10:13 AM<br />
+          Se reportan fallecidos<br />
+          94 CDMX<br />
+          76 Morelos<br />
+          43 Puebla<br />
+          12 Estado de México<br />
+          4 Guerrero<br />
+          1 Oaxaca
+        </p>
       </div>
     </div>
   )
