@@ -53,7 +53,14 @@ export default class Buildings extends Component {
   }
 
   toggleModal () {
-    this.setState({modalOpen: !this.state.modalOpen})
+    this.setState({
+      modalOpen: !this.state.modalOpen,
+      direccion: this.data.direccion,
+      colonia: this.data.colonia,
+      estado: this.data.estado,
+      link: this.data.link,
+      notas: this.data.notas
+    })
   }
 
   onSubmit () {
