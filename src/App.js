@@ -78,12 +78,92 @@ class App extends Component {
     return content
   }
 
+  // Render menu
+  renderMenu () {
+    return (
+      <section className='hero is-primary'>
+        <div className='hero-body'>
+          <div className='container'>
+            <h1 className='title'>
+              Ayuda para sismos, inundaciones y demás en México
+            </h1>
+            <h2 className='subtitle'>
+              Sismo del 19 de septiembre de 2017
+            </h2>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // Render footer
+  renderFooter () {
+    return (
+      <div className='section'>
+        <div className='content'>
+          <p className='has-text-centered'>
+                  Hackeado por <a href='https://twitter.com/jmz7v' target='_blank'>Julio</a>, <a href='https://twitter.com/dyegolara' target='_blank'>Diego</a>, <a href='https://twitter.com/cesarslh' target='_blank'>César</a>, <a href='https://twitter.com/abuzzany' target='_blank'>Angel</a> y <a href='https://twitter.com/LuisOsnet' target='_blank'>Luis</a> .
+              </p>
+        </div>
+      </div>
+    )
+  }
+
+  // Render help numbers
+  renderHelpNumbers () {
+    return (
+      <div className='content'>
+        <h2 className='title'>Teléfonos de emergencia</h2>
+        <h3 className='subtitle'>Ciudad de México</h3>
+        <ul>
+            <li>Protección Civil: (55)5683-2222 / (55)5277-4177</li>
+            <li>Emergencias: 911</li>
+            <li>Sistema de aguas: (55)5654-3210</li>
+            <li>Fugas: (55)5654-3210</li>
+            <li>Locatel: (55)5658-1111</li>
+            <li>Bomberos: 911 / (55)5768-3800 / (55)5768-2532</li>
+            <li>Cruz Roja: 911 / 065 / (55)5557-5757</li>
+            <li>Reporte fallas CFE: 071</li>
+            <li>Información IMSS: 01-800-623-2323</li>
+        </ul>
+        <h3 className='subtitle'>Estado de México</h3>
+        <ul>
+            <li>Emergencias: 066</li>
+            <li>Cruz roja: 065</li>
+            <li>Atención del Gobierno del Estado: 01-800 696-9696</li>
+        </ul>
+        <h3 className='subtitle'>Morelos</h3>
+        <ul>
+            <li>Informes Emergencia en Tultepec: 01800 696-9696</li>
+            <li>Emergencias: 066</li>
+            <li>Seguridad Pública del Estado: (77)7101-1000</li>
+            <li>Protección Civil: (77)7100-0515 / (77)7100-0517</li>
+            <li>Cruz Roja: (77)7315-3505 / (77)7315-3555</li>
+        </ul>
+        <h3 className='subtitle'>Puebla</h3>
+        <ul>
+            <li>Cruz Roja: (22)213-7700</li>
+            <li>Locatel: (22)211-7800</li>
+            <li>Bomberos: (22)245-8001</li>
+        </ul>
+      </div>
+    )
+  }
+
   render () {
     return (
-      <div className='container'>
-        <h1 className='title'>Encontrar gente sismo</h1>
-        {this.renderTabs()}
-        {this.renderContent()}
+      <div>
+        {this.renderMenu()}
+        <div className='container'>
+          <div className='section'>
+            {this.renderTabs()}
+            {this.renderContent()}
+          </div>
+          <hr />
+          {this.renderHelpNumbers()}
+          <hr />
+          {this.renderFooter()}
+        </div>
       </div>
     )
   }
