@@ -6,6 +6,7 @@ import './bulma.css'
 import People from './people'
 import Buildings from './buildings'
 import Shelters from './shelters'
+import Donations from './donations'
 
 // Estáticos
 import HelpNumbers from './helpNumbers'
@@ -25,6 +26,10 @@ const TABS = [
   {
     label: 'Albergues',
     slug: '/albergues'
+  },
+  {
+    label: 'Donaciones',
+    slug: '/donaciones'
   }
 ]
 
@@ -78,6 +83,9 @@ class App extends Component {
         break
       case TABS[2].label:
         content = (<Shelters{...this.props} />)
+        break
+      case TABS[3].label:
+        content = (<Donations {...this.props} />)
         break
     }
 
