@@ -12,3 +12,6 @@ run:
 
 build:
 	yarn build
+
+standard:
+	standard --fix
