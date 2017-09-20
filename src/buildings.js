@@ -8,9 +8,10 @@ import Modal from './modal'
 import Button from './button'
 
 const STATUS = [
-  {id: 'Desaparecido', label: 'Desaparecido'},
-  {id: 'Encontrado', label: 'Encontrado'},
-  {id: 'Fallecido', label: 'Fallecido'}
+  {id: 'Derrumbe (Edificio)', label: 'Derrumbe (Edificio)'},
+  {id: 'Derrumbe (Barda)', label: 'Derrumbe (Barda)'},
+  {id: 'Derrumbe (Escuela)', label: 'Derrumbe (Escuela)'},
+  {id: 'Otro', label: 'Otro'}
 ]
 
 export default class Buildings extends Component {
@@ -173,7 +174,9 @@ export default class Buildings extends Component {
               />
             </div>
             <div className='column'>
-              <TextField
+              <SelectField
+                placeholder='Estado'
+                options={STATUS}
                 label='Estado'
                 value={this.state.estado}
                 onChange={this.onChangeStatus.bind(this)}

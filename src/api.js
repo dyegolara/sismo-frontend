@@ -82,7 +82,11 @@ class People {
   }
   // New persona
   static SendNewds (data) {
-    return Post('/personas', data)
+    return Post('/personas/', data)
+  }
+  // New persona
+  static Update (id, data) {
+    return Post('/personas/' + id, data)
   }
 }
 

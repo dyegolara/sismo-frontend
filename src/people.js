@@ -26,17 +26,18 @@ export default class People extends Component {
     this.data = {
       people: [],
       filters: {
-        name: '',
-        gender: '',
-        age: '',
-        status: ''
+        nombre: '',
+        sexo: '',
+        edad: '',
+        estado: ''
       },
       modalOpen: false,
       name: '',
       gender: '',
       age: '',
       status: '',
-      notes: ''
+      notes: '',
+      id: ''
     }
     this.state = Object.assign({}, this.data)
   }
@@ -46,19 +47,19 @@ export default class People extends Component {
   }
 
   onChangeFiltersName (e) {
-    this.setState({filters: update(this.state.filters, {name: {$set: e.target.value}})})
+    this.setState({filters: update(this.state.filters, {nombre: {$set: e.target.value}})})
   }
 
   onChangeFiltersGender (e) {
-    this.setState({filters: update(this.state.filters, {gender: {$set: e.target.value}})})
+    this.setState({filters: update(this.state.filters, {sexo: {$set: e.target.value}})})
   }
 
   onChangeFiltersAge (e) {
-    this.setState({filters: update(this.state.filters, {age: {$set: e.target.value}})})
+    this.setState({filters: update(this.state.filters, {edad: {$set: e.target.value}})})
   }
 
   onChangeFiltersStatus (e) {
-    this.setState({filters: update(this.state.filters, {status: {$set: e.target.value}})})
+    this.setState({filters: update(this.state.filters, {estado: {$set: e.target.value}})})
   }
 
   onChangeName (e) {
@@ -89,7 +90,19 @@ export default class People extends Component {
     this.setState({modalOpen: !this.state.modalOpen})
   }
 
-  onSubmit () {
+  setPerson (person) {
+    console.log(person)
+    this.setState({
+      name: person.nombre,
+      age: person.edad,
+      gender: person.sexo,
+      status: person.estado,
+      notes: person.notas,
+      id: person.id
+    }, this.toggleModal)
+  }
+
+  onSubmit (id = '') {
     let { name, age, gender, status, notes, people } = this.state
     let data = {
       nombre: name,
@@ -98,17 +111,32 @@ export default class People extends Component {
       estado: status,
       notas: notes
     }
-    API.People.SendNewds(data)
-      .then(response => {
-        people.push(response.persona)
-        this.setState({ people })
-      })
+    if (id) {
+      API.People.Update(id, data)
+        .then(response => {
+          people.push(response.persona)
+          this.setState({
+            people,
+            id: '',
+            name: '',
+            age: '',
+            gender: '',
+            status: '',
+            notes: '',
+          })
+        })
+    } else {
+      API.People.SendNewds(data)
+        .then(response => {
+          people.push(response.persona)
+          this.setState({ people })
+        })
+    }
     this.toggleModal()
   }
 
-  // Resets current page to 0, then calls loadData method
   onFilter () {
-    browserHistory.push('/reportes/estatus-fiel/')
+    browserHistory.push('/personas')
     this.loadData()
   }
 
@@ -141,15 +169,12 @@ export default class People extends Component {
 
   renderFilters () {
     return (
-      <form
-        className='columns filters'
-        onSubmit={this.onFilter.bind(this)}
-      >
+      <div className='columns filters'>
         <div className='column'>
           <TextField
             onChange={this.onChangeFiltersName.bind(this)}
             placeholder='Nombre'
-            value={this.state.filters.name}
+            value={this.state.filters.nombre}
             onEnter={this.onFilter.bind(this)}
           />
         </div>
@@ -158,14 +183,14 @@ export default class People extends Component {
             options={GENDER}
             onChange={this.onChangeFiltersGender.bind(this)}
             placeholder='Sexo'
-            value={this.state.filters.gender}
+            value={this.state.filters.sexo}
           />
         </div>
         <div className='column'>
           <TextField
             onChange={this.onChangeFiltersAge.bind(this)}
             placeholder='Edad'
-            value={this.state.filters.age}
+            value={this.state.filters.edad}
             onEnter={this.onFilter.bind(this)}
           />
         </div>
@@ -173,7 +198,7 @@ export default class People extends Component {
           <SelectField
             onChange={this.onChangeFiltersStatus.bind(this)}
             placeholder='Estado'
-            value={this.state.filters.status}
+            value={this.state.filters.estado}
             options={STATUS}
           />
         </div>
@@ -190,13 +215,13 @@ export default class People extends Component {
               <Button
                 className='is-fullwidth'
                 buttonStyle='info is-outlined'
-                type='submit'
+                onClick={this.onFilter.bind(this)}
                 icon='magnify'
               >Filtrar</Button>
             </div>
           </div>
         </div>
-      </form>
+      </div>
     )
   }
 
@@ -211,6 +236,7 @@ export default class People extends Component {
         return (
           <tr
             key={`people-${person.id}`}
+            onClick={this.setPerson.bind(this, person)}
           >
             <td>{person.nombre}</td>
             <td>{person.edad}</td>
@@ -248,7 +274,7 @@ export default class People extends Component {
         title='Nuevo Reporte'
         isActive={this.state.modalOpen}
         toggleModal={this.toggleModal.bind(this)}
-        onSubmit={this.onSubmit.bind(this)}
+        onSubmit={this.onSubmit.bind(this, this.state.id)}
       >
         <div>
           <div className='columns'>
