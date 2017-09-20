@@ -8,7 +8,7 @@
 import 'whatwg-fetch'
 import queryString from 'query-string'
 
-const DEBUG = true
+const DEBUG = false
 
 // Make the actual request
 function request (method, endpoint, queryArray, body) {
