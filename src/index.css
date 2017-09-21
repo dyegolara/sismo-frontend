@@ -19,6 +19,15 @@ body {
   font-size: 0.75rem;
 }
 
+.truncateCell {
+  width: 30%;
+  max-width: 30%;
+  height: auto;
+  max-height: 3rem;
+  overflow-y: hidden;
+}
+
+
 @media (min-width: 768px) {
   .tabs.responsive {
     font-size: 1rem;

@@ -257,7 +257,7 @@ export default class People extends Component {
             <td>{person.edad}</td>
             <td>{gender}</td>
             <td>{person.estado}</td>
-            <td>{person.notas}</td>
+            <td className='truncateCell'>{person.notas}</td>
           </tr>
         )
       })
@@ -270,7 +270,7 @@ export default class People extends Component {
                 <th>Edad</th>
                 <th>Sexo</th>
                 <th>Estado</th>
-                <th>Notas</th>
+                <th className='truncateCell'>Notas</th>
               </tr>
             </thead>
             <tbody>

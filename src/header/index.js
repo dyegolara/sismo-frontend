@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 const Header = props => {
   return (
-    <section className='hero is-primary'>
+    <section className='hero is-dark is-bold'>
       <div className='hero-body'>
         <div className='container'>
           <h1 className='title'>
