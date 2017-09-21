@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import update from 'react-addons-update'
 import _pickBy from 'lodash/pickBy'
+import _sortBy from 'lodash/sortBy'
 
 import API from './api'
 import Button from './button'
@@ -162,7 +163,7 @@ export default class People extends Component {
     this.setState({reqInProg: true})
     API.People.GetList(params)
       .then(response => {
-        this.setState({people: response.personas, reqInProg: false})
+        this.setState({people: _sortBy(response.personas, ['nombre']), reqInProg: false})
       })
   }
 
