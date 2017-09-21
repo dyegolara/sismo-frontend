@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import update from 'react-addons-update'
 import _pickBy from 'lodash/pickBy'
+import _sortBy from 'lodash/sortBy'
 
 import API from './api'
 import Button from './button'
@@ -89,7 +90,14 @@ export default class People extends Component {
   }
 
   toggleModal () {
-    this.setState({modalOpen: !this.state.modalOpen})
+    this.setState({
+      modalOpen: !this.state.modalOpen,
+      name: this.data.name,
+      gender: this.data.gender,
+      age: this.data.age,
+      status: this.data.status,
+      notes: this.data.notes
+    })
   }
 
   onFilter () {
@@ -110,13 +118,14 @@ export default class People extends Component {
 
   setPerson (person) {
     this.setState({
+      modalOpen: !this.state.modalOpen,
       name: person.nombre,
       age: person.edad,
       gender: person.sexo,
       status: person.estado,
       notes: person.notas,
       id: person.id
-    }, this.toggleModal)
+    })
   }
 
   onSubmit (id = '') {
@@ -154,7 +163,7 @@ export default class People extends Component {
     this.setState({reqInProg: true})
     API.People.GetList(params)
       .then(response => {
-        this.setState({people: response.personas, reqInProg: false})
+        this.setState({people: _sortBy(response.personas, ['nombre']), reqInProg: false})
       })
   }
 
@@ -182,6 +191,7 @@ export default class People extends Component {
             placeholder='Nombre'
             value={this.state.filters.nombre}
             onEnter={this.onFilter.bind(this)}
+            required
           />
         </div>
         <div className='column'>
@@ -249,7 +259,7 @@ export default class People extends Component {
             <td>{person.edad}</td>
             <td>{gender}</td>
             <td>{person.estado}</td>
-            <td>{person.notas}</td>
+            <td className='truncateCell'>{person.notas}</td>
           </tr>
         )
       })
@@ -262,7 +272,7 @@ export default class People extends Component {
                 <th>Edad</th>
                 <th>Sexo</th>
                 <th>Estado</th>
-                <th>Notas</th>
+                <th className='truncateCell'>Notas</th>
               </tr>
             </thead>
             <tbody>
@@ -290,6 +300,7 @@ export default class People extends Component {
                 label='Nombre'
                 value={this.state.name}
                 onChange={this.onChangeName.bind(this)}
+                required
               />
             </div>
           </div>

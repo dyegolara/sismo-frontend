@@ -125,6 +125,7 @@ class App extends Component {
         <Header />
         <div className='container'>
           <div className='section'>
+            <div className='notification is-info'>Lo que más están solicitando en éste momento son: impermeables, baterías, diesel, plantas de luz y maquinaria/herramientas para remover escombros. Acércate a tu centro de acopio más cercano para ayudar.</div>
             {this.renderTabs()}
             {this.renderContent()}
           </div>
