@@ -191,6 +191,7 @@ export default class People extends Component {
             placeholder='Nombre'
             value={this.state.filters.nombre}
             onEnter={this.onFilter.bind(this)}
+            required
           />
         </div>
         <div className='column'>
@@ -299,6 +300,7 @@ export default class People extends Component {
                 label='Nombre'
                 value={this.state.name}
                 onChange={this.onChangeName.bind(this)}
+                required
               />
             </div>
           </div>

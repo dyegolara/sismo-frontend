@@ -91,6 +91,7 @@ class App extends Component {
               label='Nombre'
               value={this.state.name}
               onChange={this.onChangeName.bind(this)}
+              required
             />
           </div>
         </div>
