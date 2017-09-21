@@ -156,9 +156,8 @@ export default class People extends Component {
 
   // Get clients
   loadData () {
-    let { filters, currentPage, sort } = this.state
+    let { filters } = this.state
     let _filters = _pickBy(filters, filter => filter.length > 0)
-    // let page = currentPage > 1 ? {page: currentPage} : {}
     let params = Object.assign({}, _filters)
     this.setState({reqInProg: true})
     API.People.GetList(params)

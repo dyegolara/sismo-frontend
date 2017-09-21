@@ -38,7 +38,7 @@ const TABS = [
   }
 ]
 
-const MAP_LINK = 'http://google.org/crisismap/google.com/puebla-mexico-earthquake-es?hl=es-MX'
+const MAP_LINK = 'https://google.org/crisismap/google.com/puebla-mexico-earthquake-es?hl=es-MX'
 
 class App extends Component {
   constructor (props) {
