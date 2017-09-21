@@ -38,6 +38,8 @@ const TABS = [
   }
 ]
 
+const MAP_LINK = 'http://google.org/crisismap/google.com/puebla-mexico-earthquake-es?hl=es-MX'
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -47,6 +49,19 @@ class App extends Component {
       currentTab: (typeof test[0] !== 'undefined') ? test[0].label : TABS[0].label
     }
     this.state = Object.assign({}, this.data)
+  }
+
+  componentDidMount () {
+    this.loadMapData()
+  }
+
+  loadMapData () {
+    let embeddedMap = <iframe
+      width='100%'
+      height='500'
+      src={`${MAP_LINK}&embedded=true`}
+      style={{border: '1px solid #ccc'}} />
+    this.setState({ embeddedMap })
   }
 
   // Set current tab to tab
@@ -87,7 +102,11 @@ class App extends Component {
         content = (<Buildings {...this.props} />)
         break
       case TABS[2].label:
-        content = (<Map{...this.props} />)
+        content = (<Map
+          mapLink={MAP_LINK}
+          embeddedMap={this.state.embeddedMap}
+          {...this.props}
+        />)
         break
       case TABS[3].label:
         content = (<Shelters {...this.props} />)
