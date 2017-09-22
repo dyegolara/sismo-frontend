@@ -114,15 +114,6 @@ export default class Buildings extends Component {
     this.toggleModal()
   }
 
-  // Get buildings
-  loadData () {
-    this.setState({reqInProg: true})
-    API.Buildings.GetList()
-      .then(response => {
-        this.setState({buildings: response.edificios, reqInProg: false})
-      })
-  }
-
   renderNewButton () {
     return (
       <div className='new-element-container'>
