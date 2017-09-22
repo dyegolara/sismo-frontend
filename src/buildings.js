@@ -15,12 +15,12 @@ const STATUS = [
 ]
 
 export default class Buildings extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.data = {
-      buildings: [],
+      buildings: props.buildings,
       modalOpen: false,
-      reqInProg: false,
+      reqInProg: props.reqInProg,
       direccion: '',
       colonia: '',
       estado: '',
@@ -32,7 +32,14 @@ export default class Buildings extends Component {
   }
 
   componentDidMount () {
-    this.loadData()
+    this.props.loadData()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      buildings: nextProps.buildings,
+      reqInProg: nextProps.reqInProg
+    })
   }
 
   onChangeAddress (e) {
@@ -107,13 +114,10 @@ export default class Buildings extends Component {
     this.toggleModal()
   }
 
-  // Get clients
+  // Get buildings
   loadData () {
-    let { filters } = this.state
-    let _filters = _pickBy(filters, filter => filter.length > 0)
-    let params = Object.assign({}, _filters)
     this.setState({reqInProg: true})
-    API.Buildings.GetList(params)
+    API.Buildings.GetList()
       .then(response => {
         this.setState({buildings: response.edificios, reqInProg: false})
       })
@@ -136,7 +140,7 @@ export default class Buildings extends Component {
 
   renderTable () {
     let { buildings, reqInProg } = this.state
-    if (reqInProg) return <div>Cargando...</div>
+    if (reqInProg && buildings.length === 0) return <div>Cargando...</div>
     let table = <div>No hay resultados...</div>
     if (buildings.length > 0) {
       let buildingsList = buildings.map(building => {
