@@ -56,7 +56,7 @@ export default class Buildings extends Component {
   }
 
   toggleModal () {
-    this.setState({modalOpen: !this.state.modalOpen})
+    this.setState({modalOpen: !this.state.modalOpen}, this.resetState)
   }
 
   resetState () {
@@ -72,13 +72,14 @@ export default class Buildings extends Component {
 
   setBuilding (building) {
     this.setState({
+      modalOpen: !this.state.modalOpen,
       direccion: building.direccion,
       colonia: building.colonia,
       estado: building.estado,
       link: building.link,
       notas: building.notas,
       id: building.id
-    }, this.toggleModal)
+    })
   }
 
   onSubmit (id = '') {
@@ -108,9 +109,8 @@ export default class Buildings extends Component {
 
   // Get clients
   loadData () {
-    let { filters, currentPage, sort } = this.state
+    let { filters } = this.state
     let _filters = _pickBy(filters, filter => filter.length > 0)
-    // let page = currentPage > 1 ? {page: currentPage} : {}
     let params = Object.assign({}, _filters)
     this.setState({reqInProg: true})
     API.Buildings.GetList(params)
