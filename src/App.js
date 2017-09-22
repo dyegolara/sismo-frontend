@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import classNames from 'classnames'
-import './bulma.css'
 
+import API from './api'
 import People from './people'
 import Buildings from './buildings'
 import Shelters from './shelters'
@@ -46,13 +46,25 @@ class App extends Component {
     let path = props.location.pathname
     let test = TABS.filter((tab) => { if (path.includes(tab.slug)) return tab })
     this.data = {
-      currentTab: (typeof test[0] !== 'undefined') ? test[0].label : TABS[0].label
+      currentTab: (typeof test[0] !== 'undefined') ? test[0].label : TABS[0].label,
+      buildings: [],
+      reqInProg: false,
     }
     this.state = Object.assign({}, this.data)
   }
 
   componentDidMount () {
+    this.loadBuildingsData()
     this.loadMapData()
+  }
+
+  // Get buildings
+  loadBuildingsData () {
+    this.setState({reqInProg: true})
+    API.Buildings.GetList()
+      .then(response => {
+        this.setState({buildings: response.edificios, reqInProg: false})
+      })
   }
 
   loadMapData () {
@@ -99,13 +111,16 @@ class App extends Component {
         content = (<People {...this.props} />)
         break
       case TABS[1].label:
-        content = (<Buildings {...this.props} />)
+        content = (<Buildings
+          reqInProg={this.state.reqInProg}
+          buildings={this.state.buildings}
+          loadData={this.loadBuildingsData.bind(this)}
+        />)
         break
       case TABS[2].label:
         content = (<Map
           mapLink={MAP_LINK}
           embeddedMap={this.state.embeddedMap}
-          {...this.props}
         />)
         break
       case TABS[3].label:

@@ -15,12 +15,12 @@ const STATUS = [
 ]
 
 export default class Buildings extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.data = {
-      buildings: [],
+      buildings: props.buildings,
       modalOpen: false,
-      reqInProg: false,
+      reqInProg: props.reqInProg,
       direccion: '',
       colonia: '',
       estado: '',
@@ -32,7 +32,14 @@ export default class Buildings extends Component {
   }
 
   componentDidMount () {
-    this.loadData()
+    this.props.loadData()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      buildings: nextProps.buildings,
+      reqInProg: nextProps.reqInProg
+    })
   }
 
   onChangeAddress (e) {
@@ -56,7 +63,7 @@ export default class Buildings extends Component {
   }
 
   toggleModal () {
-    this.setState({modalOpen: !this.state.modalOpen})
+    this.setState({modalOpen: !this.state.modalOpen}, this.resetState)
   }
 
   resetState () {
@@ -72,13 +79,14 @@ export default class Buildings extends Component {
 
   setBuilding (building) {
     this.setState({
+      modalOpen: !this.state.modalOpen,
       direccion: building.direccion,
       colonia: building.colonia,
       estado: building.estado,
       link: building.link,
       notas: building.notas,
       id: building.id
-    }, this.toggleModal)
+    })
   }
 
   onSubmit (id = '') {
@@ -106,19 +114,6 @@ export default class Buildings extends Component {
     this.toggleModal()
   }
 
-  // Get clients
-  loadData () {
-    let { filters, currentPage, sort } = this.state
-    let _filters = _pickBy(filters, filter => filter.length > 0)
-    // let page = currentPage > 1 ? {page: currentPage} : {}
-    let params = Object.assign({}, _filters)
-    this.setState({reqInProg: true})
-    API.Buildings.GetList(params)
-      .then(response => {
-        this.setState({buildings: response.edificios, reqInProg: false})
-      })
-  }
-
   renderNewButton () {
     return (
       <div className='new-element-container'>
@@ -136,7 +131,7 @@ export default class Buildings extends Component {
 
   renderTable () {
     let { buildings, reqInProg } = this.state
-    if (reqInProg) return <div>Cargando...</div>
+    if (reqInProg && buildings.length === 0) return <div>Cargando...</div>
     let table = <div>No hay resultados...</div>
     if (buildings.length > 0) {
       let buildingsList = buildings.map(building => {

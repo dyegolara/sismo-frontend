@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
-import classNames from 'classnames'
-import './bulma.css'
 
 import API from './api'
 import Button from './button'
