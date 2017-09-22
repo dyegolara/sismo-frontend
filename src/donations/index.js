@@ -1,5 +1,4 @@
-import React, { PropTypes } from 'react'
-import classNames from 'classnames'
+import React from 'react'
 
 const SOURCE = [
   {
@@ -8,7 +7,7 @@ const SOURCE = [
   },
   {
     link: 'https://www.amazon.com.mx/b?ie=UTF8&node=17290014011',
-    label: 'Cruz Rojo Mexico (Red Cross Mexico) - Amazon Wishlist '
+    label: 'Cruz Roja Mexico (Red Cross Mexico) - Amazon Wishlist '
   },
   {
     link: 'https://www.donaunicef.org.mx/landing-terremoto/?utm_source=mpr_redes&utm_campaign=tw-terremoto&utm_medium=tw&utm_content=tw-org&utm_term=tw-org',
@@ -37,11 +36,11 @@ const SOURCE = [
   {
     link: 'https://www.gofundme.com/b7uj4b-supporting-mexico',
     label: 'Supporting Mexico'
-  },
+  }
 ]
 
-const Donations = props => {
-  let donations = SOURCE.map(function (don, index) {
+export default () => {
+  let donations = SOURCE.map((don, index) => {
     return (
       <li
         key={index}
@@ -54,7 +53,7 @@ const Donations = props => {
         </a>
       </li>
     )
-  }.bind(this))
+  })
   return (
     <div className='section'>
       <div className='content'>
@@ -66,5 +65,3 @@ const Donations = props => {
     </div>
   )
 }
-
-export default Donations
