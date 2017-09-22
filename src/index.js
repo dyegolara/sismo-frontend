@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, Redirect, browserHistory } from 'react-router'
 import './index.css'
+import './bulma.css'
 import App from './App'
 import NewReport from './newReport'
 

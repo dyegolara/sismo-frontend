@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import classNames from 'classnames'
-import './bulma.css'
 
 import People from './people'
 import Buildings from './buildings'
