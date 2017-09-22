@@ -69,10 +69,12 @@ export default class Shelters extends Component {
   onSubmit (id = '') {
     let { direccion, nombre, espacios, necesidades, shelters } = this.state
     let data = {
-      direccion,
-      nombre,
-      espacios,
-      necesidades
+      albergues: {
+        direccion,
+        nombre,
+        espacios,
+        necesidades
+      }
     }
     if (id) {
       API.Shelters.Update(id, data)
