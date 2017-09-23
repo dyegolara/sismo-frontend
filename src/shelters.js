@@ -198,11 +198,14 @@ export default class Shelters extends Component {
           </div>
           <div className='columns'>
             <div className='column'>
-              <TextField
-                label='Necesidades'
-                value={this.state.necesidades}
-                onChange={this.onChangeNeeds.bind(this)}
-              />
+              <div className='control'>
+                <label className='label'>Necesidades</label>
+                <textarea
+                  className='textarea is-fullwidth'
+                  value={this.state.necesidades}
+                  onChange={this.onChangeNeeds.bind(this)}
+                />
+              </div>
             </div>
           </div>
         </div>

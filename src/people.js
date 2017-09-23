@@ -328,11 +328,14 @@ export default class People extends Component {
           </div>
           <div className='columns'>
             <div className='column'>
-              <TextField
-                label='Notas'
-                value={this.state.notes}
-                onChange={this.onChangeNotes.bind(this)}
-              />
+              <div className='control'>
+                <label className='label'>Notas</label>
+                <textarea
+                  className='textarea is-fullwidth'
+                  value={this.state.notes}
+                  onChange={this.onChangeNotes.bind(this)}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -218,11 +218,14 @@ export default class Buildings extends Component {
           </div>
           <div className='columns'>
             <div className='column'>
-              <TextField
-                label='Notas'
-                value={this.state.notas}
-                onChange={this.onChangeNotes.bind(this)}
-              />
+              <div className='control'>
+                <label className='label'>Notas</label>
+                <textarea
+                  className='textarea is-fullwidth'
+                  value={this.state.notas}
+                  onChange={this.onChangeNotes.bind(this)}
+                />
+              </div>
             </div>
           </div>
         </div>
