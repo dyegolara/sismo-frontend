@@ -83,12 +83,13 @@ export default class Shelters extends Component {
           shelters = shelters.map(shelter => shelter.id === updatedShelter.id ? updatedShelter : shelter)
           this.setState({shelters}, this.resetState)
         })
+    } else {
+      API.Shelters.SendNewds(data)
+        .then(response => {
+          shelters.push(response.albergue)
+          this.setState({shelters})
+        })
     }
-    API.Shelters.SendNewds(data)
-      .then(response => {
-        shelters.push(response.albergue)
-        this.setState({shelters})
-      })
     this.toggleModal()
   }
 

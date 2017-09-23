@@ -105,12 +105,13 @@ export default class Buildings extends Component {
           buildings = buildings.map(building => building.id === updatedBuilding.id ? updatedBuilding : building)
           this.setState({ buildings }, this.resetState)
         })
+    } else {
+      API.Buildings.SendNewds(data)
+        .then(response => {
+          buildings.push(response.edificio)
+          this.setState({buildings})
+        })
     }
-    API.Buildings.SendNewds(data)
-      .then(response => {
-        buildings.push(response.edificio)
-        this.setState({ buildings })
-      })
     this.toggleModal()
   }
 
