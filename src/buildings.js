@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import _pickBy from 'lodash/pickBy'
+import classNames from 'classnames'
 
 import API from './api'
 import TextField from './textField'
@@ -140,6 +141,7 @@ export default class Buildings extends Component {
           <tr
             key={`buildings-${building.id}`}
             onClick={this.setBuilding.bind(this, building)}
+            className={classNames({'is-hidden': building.direccion === 'Duplicado'})}
           >
             <td>{building.direccion}</td>
             <td>{building.colonia}</td>

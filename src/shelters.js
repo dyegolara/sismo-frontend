@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import _pickBy from 'lodash/pickBy'
+import classNames from 'classnames'
 
 import API from './api'
 import TextField from './textField'
@@ -130,6 +131,7 @@ export default class Shelters extends Component {
           <tr
             key={`shelters-${index}`}
             onClick={this.setShelter.bind(this, shelter)}
+            className={classNames({'is-hidden': shelter.direccion === 'Duplicado'})}
           >
             <td>{shelter.direccion}</td>
             <td>{shelter.nombre}</td>

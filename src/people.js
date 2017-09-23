@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router'
 import update from 'react-addons-update'
 import _pickBy from 'lodash/pickBy'
 import _sortBy from 'lodash/sortBy'
+import classNames from 'classnames'
 
 import API from './api'
 import Button from './button'
@@ -246,6 +247,7 @@ export default class People extends Component {
           <tr
             key={`people-${person.id}`}
             onClick={this.setPerson.bind(this, person)}
+            className={classNames({'is-hidden': person.nombre === 'Duplicado'})}
           >
             <td>{person.nombre}</td>
             <td>{person.edad}</td>
